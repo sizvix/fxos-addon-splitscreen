@@ -1,0 +1,36 @@
+.fxos-banner {
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(to bottom,rgba(255,212,84,0.9),rgba(255,248,115,0.9));
+  position: absolute;
+  z-index: 3000;
+  top: 1em;
+  left: 1em;
+  right: 1em;
+  bottom: 50%;
+  border: 1px solid black;
+}
+
+.fxos-banner p, .fxos-banner button {
+  position: absolute;
+}
+
+.fxos-banner p {
+  padding-top: 0.5em;
+  width: 75%;
+  line-height: 2em;
+  left: 1em;
+  margin: 0;
+}
+
+.fxos-banner button {
+  padding-top: 0.5em;
+  font-size: 18px;
+  line-height: 2em;
+  right: 0.33em;
+  border: none;
+  background: none;
+  display: block;
+  cursor: pointer;
+}
