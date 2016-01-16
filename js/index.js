@@ -5,13 +5,16 @@ SplitScreen = {
 
 if (window.AppWindow) {
     console.log('Split screen AppWindow already created');
-    initialize(window.AppWindow);
+    initialize();
+} else {
+    console.log('Split screen Lazy load AppWindow');
+    LazyLoader.load(['js/app_window.js'])
+        .then(function() {
+            initialize();
+        }).catch(function(err) {
+            console.error(err)
+        });
 }
-
-window.addEventListener('appcreated', function(event) {
-    console.log('Split screen AppWindow just created');
-    initialize(event.detail);
-});
 
 navigator.mozApps.mgmt.addEventListener('enabledstatechange', function(event) {
     var app = event.application;
@@ -26,13 +29,13 @@ navigator.mozApps.mgmt.addEventListener('enabledstatechange', function(event) {
     }
 });
 
-function initialize(appWindow) {
+function initialize() {
     console.log('initialize');
     // if (!SplitScreen.originalResize) {
     //     SplitScreen.originalResize = appWindow._resize;
     // }
-    console.log(appWindow);
-    appWindow.prototype._resize = splitscreen_resize;
+    console.log(window.AppWindow);
+    window.AppWindow.prototype._resize = splitscreen_resize;
     console.log('Split screen AppWindow initialized');
 }
 
