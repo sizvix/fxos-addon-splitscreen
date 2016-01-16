@@ -3,20 +3,21 @@ SplitScreen = {
     originalResize: null
 };
 
-if (window.AppWindow) {
-    console.log('Split screen AppWindow already created');
-    initialize();
+if (document.readyState === 'complete') {
+    console.log('document state is complete');
+    setTimeout(() => {
+
+        initialize();
+    }, 10000);
 } else {
-    console.log('Split screen Lazy load AppWindow');
-    LazyLoader.load(['js/app_window.js'])
-        .then(function() {
-            initialize();
-        }).catch(function(err) {
-            console.error(err)
-        });
+    console.log('document is not ready');
+    window.addEventListener('load', () => {
+        console.log('now document state is complete');
+        initialize();
+    });
 }
 
-navigator.mozApps.mgmt.addEventListener('enabledstatechange', function(event) {
+navigator.mozApps.mgmt.addEventListener('enabledstatechange', event => {
     var app = event.application;
     if (app.manifestURL === 'app://fb7f8e93-a39a-490a-aeee-e6014509e060/manifest.webapp') {
         if (app.enabled) {
@@ -30,16 +31,36 @@ navigator.mozApps.mgmt.addEventListener('enabledstatechange', function(event) {
 });
 
 function initialize() {
+    console.log(this);
     console.log('initialize');
+    if (typeof window.AppWindow === 'undefined') {
+        console.log(typeof window.LazyLoader === 'undefined');
+        console.log('after LazyLoader');
+        LazyLoader.load(['js/app_window.js'])
+            .then(() => {
+                console.log('then called');
+                _initialize();
+            }).catch((err) => {
+                console.error(err)
+            });
+    } else {
+        console.log('AAAAA');
+        _initialize();
+    }
+}
+
+function _initialize() {
+    console.log('_initialize');
+
     // if (!SplitScreen.originalResize) {
     //     SplitScreen.originalResize = appWindow._resize;
     // }
-    console.log(window.AppWindow);
     window.AppWindow.prototype._resize = splitscreen_resize;
     console.log('Split screen AppWindow initialized');
 }
 
 function splitscreen_resize(ignoreKeyboard) {
+    console.log('splitscreen_resize');
     var height, width;
     this.debug('force RESIZE...');
     if (!ignoreKeyboard && Service.query('keyboardEnabled')) {
