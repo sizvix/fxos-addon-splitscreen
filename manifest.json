@@ -1,15 +1,15 @@
 {
     "manifest_version": 1,
-    "name": "Add-on example",
-    "description": "Firefox OS add-on example",
-    "version": "1.0",
-    "author": "Chris Mills",
+    "name": "Split screen",
+    "description": "Firefox OS add-on for splitting screen",
+    "version": "0.1",
+    "author": "sizvix",
     "content_scripts": [{
-      "matches": ["app://system.gaiamobile.org/index.html"],
-      "css": ["css/style.css"],
-      "js": ["js/index.js"]
+        "matches": ["app://system.gaiamobile.org/index.html"],
+        "css": ["css/style.css"],
+        "js": ["js/index.js"]
     }],
     "icons": {
-      "128": "/icons/128.png"
+        "128": "/icons/128.png"
     }
 }
