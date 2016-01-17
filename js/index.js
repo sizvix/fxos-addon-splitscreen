@@ -1,7 +1,7 @@
 var app1 = null;
 var app2 = null;
 var homescreen;
-var cslpre = '!!-';
+var cslpre = '!-!';
 
 SplitScreen = typeof SplitScreen === 'undefined' ? {
     originalResize: null,
@@ -51,8 +51,8 @@ const listeners = {
             }
         }
     },
-    appwillclose: {
-        event: 'appwillclose',
+    appwillclosed: {
+        event: 'appwillclosed',//
         callback: function(event) {
             console.log(cslpre + ' on a appwillclose');
             if (!homescreen.classList.contains('active'))
@@ -64,9 +64,9 @@ const listeners = {
 };
 
 function gen_split(appWindow) {
-    if (!homescreen.classList.contains('active')) {
+    if (appWindow.element.id!="homescreen") {
         console.log(cslpre + ' on est pas dans le homescreen');
-        let active = document.querySelector('#windows .active');
+        let active = appWindow.element;// document.querySelector('#windows .active');
         if (app1 == null) {
             console.log(cslpre + ' on a pas encore une app');
             show2(active, null);
@@ -89,12 +89,22 @@ function show2(first, second) {
     if (second == null)
         second = homescreen;
     console.log(cslpre + ' on va modif les css vers 2');
+    if(first.classList.contains('inactive')){
+        first.classList.remove('inactive');
+        first.classList.add('active');
+    }
     first.style.height = '50%';
-    second.style.transform = 'translate(0,0)';
+    first.querySelector('.fade-overlay').style.display = 'none';
+    first.querySelector('iframe').style.visibility = 'visible';
+    first.style.transform = 'translate(0,0)';
+    if(second.classList.contains('inactive')){
+        second.classList.remove('inactive');
+        second.classList.add('active');
+    }
     second.style.height = '50%';
     second.style.transform = 'translate(0,100%)';
-    homescreen.querySelector('.fade-overlay').style.display = 'none';
-    homescreen.querySelector('iframe').style.visibility = 'visible';
+    second.querySelector('.fade-overlay').style.display = 'none';
+    second.querySelector('iframe').style.visibility = 'visible';
 }
 
 function show1(first) {
@@ -113,6 +123,7 @@ function show1(first) {
 // Main
 removeAddon(); // for testing - Ensures that previous deployed addons are removed
 window.addEventListener(listeners.appresize.event, listeners.appresize.callback);
+window.addEventListener(listeners.appwillclosed.event, listeners.appwillclosed.callback);
 navigator.mozApps.mgmt.addEventListener('enabledstatechange', listeners.enabledstatechange.callback);
 
 /*if(!homescreen.classList.contains('active')){
