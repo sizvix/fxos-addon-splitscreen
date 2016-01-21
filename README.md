@@ -1,3 +1,3 @@
-# simple-addon
+# splitscreen add-on for Firefox OS
 
-Simple add-on to demonstrate how to create add-ons for Firefox OS. For more information, read [Firefox OS add-ons](https://developer.mozilla.org/en-US/Firefox_OS/Add-ons).
+This add-on will make Firefox OS used 2 apps at the same time by separate the screen in 2 parts.
