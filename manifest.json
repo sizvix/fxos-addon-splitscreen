@@ -2,7 +2,7 @@
     "manifest_version": 1,
     "name": "Split screen",
     "description": "Firefox OS add-on for splitting screen",
-    "version": "0.1",
+    "version": "0.2",
     "author": "sizvix",
     "content_scripts": [{
         "matches": ["app://system.gaiamobile.org/index.html"],
@@ -10,6 +10,7 @@
         "js": ["js/index.js"]
     }],
     "icons": {
-        "128": "/icons/128.png"
+        "128": "/icons/128.png",
+        "24" : "/icons/split.svg"
     }
 }

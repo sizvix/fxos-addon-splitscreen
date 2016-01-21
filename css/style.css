@@ -34,3 +34,25 @@
   display: block;
   cursor: pointer;
 }
+
+.spltscrn_btn_up, .spltscrn_btn_bottom {
+  margin: 0.5em;
+  float: right;
+  font-size: initial;
+}
+
+.split_icon_p2 {  
+  border: solid 1.5px white;
+  transform: rotate(-45deg) translate(20%,400%);
+  width: 32px;
+}
+
+.split_icon_p1 {  
+  border: 3px solid white;
+  height: 20px;
+  width: 10px;
+  transform: rotate(-45deg) translate(20%, 110%);
+}
+#quick-settings-splitsreen[data-enabled] *{
+  border-color: #008eab ;
+}
