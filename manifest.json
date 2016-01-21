@@ -10,7 +10,6 @@
         "js": ["js/index.js"]
     }],
     "icons": {
-        "128": "/icons/128.png",
-        "24" : "/icons/split.svg"
+        "128": "/icons/128.png"
     }
 }
